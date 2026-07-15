@@ -4,10 +4,12 @@
  */
 package com.miguelperez.controller;
 
+import com.miguelperez.view.BienvenidaView;
 import com.miguelperez.view.LoginView;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javax.swing.JOptionPane;
@@ -38,6 +40,26 @@ public class SceneManager {
             objetoNulo.printStackTrace(); //muestra todo el camino del error
         } catch(Exception errorPadre){
             JOptionPane.showMessageDialog(null, "Error Padre: Ventana Login");
+            errorPadre.printStackTrace(); 
+        }
+    }
+    
+    public void ventanaBienvenida(){
+        try{
+            this.escenarioSecundario = new Stage();
+            this.escenarioSecundario.initStyle(StageStyle.TRANSPARENT);
+            this.escenarioSecundario.initModality(Modality.APPLICATION_MODAL);
+            BienvenidaView bienvenida = new BienvenidaView();
+            this.escenaPrincipal = new Scene(bienvenida, 15, 25);
+            this.escenarioSecundario.setScene(escenaPrincipal);
+            this.escenarioSecundario.sizeToScene();
+            this.escenarioSecundario.showAndWait();
+            
+        } catch(NullPointerException objetoNulo) {
+            JOptionPane.showMessageDialog(null, "Error de objeto nulo: Ventana Bienvenida");
+            objetoNulo.printStackTrace(); //muestra todo el camino del error
+        } catch(Exception errorPadre){
+            JOptionPane.showMessageDialog(null, "Error Padre: Cambiar Escena");
             errorPadre.printStackTrace(); 
         }
     }
